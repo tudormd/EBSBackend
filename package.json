@@ -1,0 +1,52 @@
+{
+  "name": "PostgreeProject",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "watch-ts": "tsc -w",
+    "watch-node": "set APP_ENV=.env.dev&&nodemon dist/server.js",
+    "watch": "concurrently -k -p \"[{name}]\" -n \"TypeScript,Node\" -c \"cyan.bold,green.bold\" \"npm run watch-ts\" \"npm run watch-node\""
+  },
+  "keywords": [],
+  "author": "Tudor",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^3.0.4",
+    "body-parser": "^1.18.3",
+    "casbin": "^2.0.1",
+    "casbin-sequelize-adapter": "^1.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^6.2.0",
+    "errorhandler": "^1.5.0",
+    "express": "^4.16.4",
+    "express-session": "^1.15.6",
+    "express-validator": "^5.3.1",
+    "jsonwebtoken": "^8.5.0",
+    "lusca": "^1.6.1",
+    "moment": "^2.24.0",
+    "morgan": "^1.9.1",
+    "path": "^0.12.7",
+    "pg": "^7.8.0",
+    "pg-hstore": "^2.3.2",
+    "sequelize": "^4.42.0"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.16.8",
+    "@types/compression": "^0.0.35",
+    "@types/cors": "^2.8.4",
+    "@types/dotenv": "^4.0.2",
+    "@types/errorhandler": "^0.0.32",
+    "@types/express": "^4.16.1",
+    "@types/express-session": "^1.15.12",
+    "@types/lusca": "^1.5.0",
+    "@types/morgan": "^1.7.35",
+    "@types/node": "^11.9.4",
+    "@types/request": "^2.47.0",
+    "compression": "^1.7.3",
+    "concurrently": "^4.1.0",
+    "nodemon": "^1.18.10",
+    "ts-node": "^5.0.0",
+    "typescript": "^2.7.2"
+  }
+}
