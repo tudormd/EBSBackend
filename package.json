@@ -2,7 +2,7 @@
   "name": "PostgreeProject",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "dist/server.js",
   "scripts": {
     "watch-ts": "tsc -w",
     "watch-node": "set APP_ENV=.env.dev&&nodemon dist/server.js",
