@@ -11,7 +11,7 @@ routes.post('/', async (req: Request, res: Response) => {
         if (group) {
             sendSuccess(res, 'Create group')(group)
         } else {
-            throwError(404, 'not create group', 'incorrect request')('')
+            throwError(404, 'not create group', 'incorrect request')({})
         }
     } catch (error) {
         sendError(res)(error)
@@ -24,7 +24,7 @@ routes.get('/:id', async (req: Request, res: Response) => {
         if (group) {
             sendSuccess(res, 'Retrieve group')(group)
         } else {
-            throwError(404, 'not found group', 'incorrect request')('')
+            throwError(404, 'not found group', 'incorrect request')({ code: 404 })
         }
     } catch (error) {
         sendError(res)(error)
@@ -38,11 +38,11 @@ routes.get('/', async (req: Request, res: Response) => {
         if (groups.length) {
             sendSuccess(res, 'Retrieve groups')(groups)
         } else {
-            throwError(404, 'not found groups', 'incorrect request')('')
-        } 
+            throwError(404, 'not found groups', 'incorrect request')({ code: 404 })
+        }
     } catch (error) {
-        sendError(res)(error) 
-    }  
+        sendError(res)(error)
+    }
 });
 routes.get('/group/:groupId', async (req: Request, res: Response) => {
     try {
@@ -50,7 +50,7 @@ routes.get('/group/:groupId', async (req: Request, res: Response) => {
         if (group) {
             sendSuccess(res, 'Retrieve group')(group)
         } else {
-            throwError(404, 'not found group', 'incorrect request')('')
+            throwError(404, 'not found group', 'incorrect request')({ code: 404 })
         }
     } catch (error) {
         sendError(res)(error)
@@ -64,7 +64,7 @@ routes.put('/:id', async (req: Request, res: Response) => {
         if (group) {
             sendSuccess(res, 'Update group')(group)
         } else {
-            throwError(404, 'not update  group', 'incorrect request')('')
+            throwError(404, 'not update  group', 'incorrect request')({ code: 404 })
         }
     } catch (error) {
         sendError(res)(error)
@@ -77,7 +77,7 @@ routes.delete('/:id', async (req: Request, res: Response) => {
         if (group > 0) {
             sendSuccess(res, 'Delete group')(group)
         } else {
-            throwError(404, 'not delete  group', 'incorrect request')('')
+            throwError(404, 'not delete  group', 'incorrect request')({ code: 404 })
         }
     } catch (error) {
         sendError(res)(error)

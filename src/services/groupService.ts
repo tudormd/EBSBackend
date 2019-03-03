@@ -82,7 +82,7 @@ export class GroupService {
                             await group.update(groupAttributes);
                             groupAttributes.users &&
                                 // @ts-ignore
-                                (await group.setUsers(groupAttributes.users));
+                                (await group.addUsers(groupAttributes.users));
 
                             const resultByGroupId = await GroupService.retrieveGroup(
                                 group.id

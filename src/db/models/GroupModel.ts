@@ -1,11 +1,16 @@
 import * as s from 'sequelize';
 import { UserAttributes } from './UserModel';
+import { validate, Length } from "class-validator";
+import { throwError } from '../../services/errorFunction';
+import { acl } from '../acl';
 
-export interface GroupAttributes {
+export class GroupAttributes {
     id?: number;
-    name: string;
-    methods: string;
-    users: UserAttributes[];
+    @Length(2, 20)
+    name?: string;
+    @Length(2, 40)
+    methods?: string;
+    users?: UserAttributes[] | number[];
     createdAt?: Date;
     updatedAt?: Date;
 
@@ -24,10 +29,24 @@ export default (
                 autoIncrement: true,
                 primaryKey: true
             },
-            name: sequelize.Sequelize.STRING,
-            methods: sequelize.Sequelize.STRING,
+            name: { type: sequelize.Sequelize.STRING, validate: { len: [2, 20], notEmpty: true } },
+            methods: { type: sequelize.Sequelize.STRING, validate: { len: [2, 20], notEmpty: true } },
         },
         {
+            validate: {
+                validateGroup() {
+                    let group = new GroupAttributes();
+                    validate(group).then(errors => {
+                        if (errors.length > 0) {
+                            console.log("validation failed. errors: ", errors);
+                        } else {
+                            console.log("validation succeed");
+                        }
+                    }).catch((error) => {
+                        throwError(404, 'Validation error', 'incorrect request')(error)
+                    });
+                }
+            },
             timestamps: true,
             // don't delete database entries but set the newly added attribute deletedAt
             // to the current date (when deletion was done). paranoid will only work if
@@ -44,9 +63,9 @@ export default (
     };
 
     Group.hook('afterUpdate', (data: any) => {
-        //   acl.sync().then(() => {
-        //   console.log('ACL Role Synched');
-        // });
+        acl.sync().then(() => {
+            console.log('ACL Role Synched');
+        });
     });
     return Group;
 };

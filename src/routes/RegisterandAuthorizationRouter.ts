@@ -19,7 +19,7 @@ routes.post('/register', async (req: Request, res: Response) => {
             );
             sendSuccess(res, 'Create token')(token);
         } else {
-            throwError(404, 'Invalid registration', 'incorrect request')('')
+            throwError(404, 'Invalid registration', 'incorrect request')({ code: 404, message: 'Invalid registration' })
         }
     } catch (error) {
         sendError(res)(error)
@@ -28,9 +28,9 @@ routes.post('/register', async (req: Request, res: Response) => {
 
 routes.post('/login', async (req: Request, res: Response) => {
     try {
-        if (!req.body.email) throwError(404, 'not found email', 'incorrect request')('')
+        if (!req.body.email) throwError(404, 'not found email', 'incorrect request')({ code: 404 })
 
-        const user = await UserService.retrieveUserByEmail(req.body.email); 
+        const user = await UserService.retrieveUserByEmail(req.body.email);
 
         if (user) {
             const passwordIsValid = await bcrypt.compare(req.body.password, user.password);
@@ -42,15 +42,15 @@ routes.post('/login', async (req: Request, res: Response) => {
                 await UserService.updateUser(user.id, { lastLoginAt: moment().utc().toDate() })
                 sendSuccess(res, 'Create token')(token);
             } else {
-                throwError(404, 'Invalid token', 'incorrect request')('')
+                throwError(404, 'Invalid token', 'incorrect request')({ code: 404 })
             }
 
         } else {
-            throwError(500, 'internal server error', 'sequelize error')('')
+            throwError(500, 'Invalid user', 'sequelize error')({ code: 500 })
         }
 
     } catch (error) {
         sendError(res)(error)
     }
 
-})
+}) 

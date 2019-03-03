@@ -11,7 +11,7 @@ routes.post('/', async (req: Request, res: Response) => {
         if (user) {
             sendSuccess(res, 'Create user')(user)
         } else {
-            throwError(404, 'not create user', 'incorrect request')('')
+            throwError(404, 'not create user', 'incorrect request')({ code: 404 })
         }
     } catch (error) {
         sendError(res)(error)
@@ -24,7 +24,7 @@ routes.get('/:id', async (req: Request, res: Response) => {
         if (user) {
             sendSuccess(res, 'Retrieve user')(user)
         } else {
-            throwError(404, 'not found user', 'incorrect request')('')
+            throwError(404, 'not found user', 'incorrect request')({ code: 404 })
         }
     } catch (error) {
         sendError(res)(error)
@@ -37,7 +37,7 @@ routes.get('/', async (req: Request, res: Response) => {
         if (users.length) {
             sendSuccess(res, 'Retrieve users')(users)
         } else {
-            throwError(404, 'not found users', 'incorrect request')('')
+            throwError(404, 'not found users', 'incorrect request')({ code: 404 })
         }
     } catch (error) {
         sendError(res)(error)
@@ -50,7 +50,7 @@ routes.put('/:id', async (req: Request, res: Response) => {
         if (user) {
             sendSuccess(res, 'Update user')(user)
         } else {
-            throwError(404, 'not update  users', 'incorrect request')('')
+            throwError(404, 'not update  users', 'incorrect request')({ code: 404 })
         }
     } catch (error) {
         sendError(res)(error)
@@ -63,7 +63,7 @@ routes.delete('/:id', async (req: Request, res: Response) => {
         if (user > 0) {
             sendSuccess(res, 'Delete user')(user)
         } else {
-            throwError(404, 'not delete  user', 'incorrect request')('')
+            throwError(404, 'not delete  user', 'incorrect request')({ code: 404 })
         }
     } catch (error) {
         sendError(res)(error)

@@ -1,0 +1,621 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.0.1",
+    "title": "EBS App",
+    "description": "Create USERManagement"
+  },
+  "host": "localhost:3004",
+  "basePath": "/",
+  "schemes": [
+    "http"
+  ],
+  "securityDefinitions": {
+    "Token": {
+      "type": "apiKey",
+      "name": "x-access-token",
+      "in": "header"
+    }
+  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/seed/test-data": {
+      "get": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "description": "Create seed  User and Group",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeneralResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/syncacl": {
+      "get": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "description": "Create User acl",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeneralResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/register": {
+      "post": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "description": "Add a new User",
+        "parameters": [
+          {
+            "name": "user",
+            "description": "User properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/login": {
+      "post": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "description": "Login User",
+        "parameters": [
+          {
+            "name": "user",
+            "description": "User properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Token"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/user": {
+      "get": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "operationId": "getAll Users",
+        "description": "Return a users list",
+        "summary": "Returns a list of users",
+        "responses": {
+          "200": {
+            "description": "Success , a user list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "description": "Add a new User",
+        "parameters": [
+          {
+            "name": "user",
+            "description": "User properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeneralResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/user/{id}": {
+      "get": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "operationId": "userId",
+        "description": "Return User by id",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "operationId": "updateUserById",
+        "description": "Update a User",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "User id",
+            "type": "integer",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "methods",
+            "description": "User properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "operationId": "removeUserById",
+        "description": "Delite a user by Id",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "User id",
+            "type": "integer",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeneralResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/group": {
+      "get": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "operationId": "getAll",
+        "description": "Return a group list",
+        "summary": "Returns a list of groups",
+        "responses": {
+          "200": {
+            "description": "Success , a group list",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object"
+              },
+              "$ref": "#/definitions/Group"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "description": "Add a new Group",
+        "parameters": [
+          {
+            "name": "group",
+            "description": "Group properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeneralResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/api/group/{id}": {
+      "get": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "operationId": "find",
+        "description": "Return Group by id",
+        "parameters": [
+          {
+            "name": "id",
+            "type": "integer",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "operationId": "update",
+        "description": "Update a Group",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Group id",
+            "type": "integer",
+            "in": "path",
+            "required": true
+          },
+          {
+            "name": "methods",
+            "description": "Group properties",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Group"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "security": [
+          {
+            "Token": [
+
+            ]
+          }
+        ],
+        "operationId": "remove",
+        "description": "Delite a groop by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "description": "Group id",
+            "type": "integer",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/GeneralResponse"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/swagger": {
+      "x-swagger-pipe": "swagger_raw"
+    }
+  },
+  "definitions": {
+    "Group": {
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "methods": {
+          "type": "string"
+        },
+        "users": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "deletedAt": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "methods"
+      ]
+    },
+    "User": {
+      "properties": {
+        "firstName": {
+          "type": "string"
+        },
+        "lastName": {
+          "type": "string"
+        },
+        "email": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/Group"
+          }
+        },
+        "createdAt": {
+          "type": "string"
+        },
+        "updatedAt": {
+          "type": "string"
+        },
+        "deletedAt": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "firstName",
+        "lastName",
+        "email",
+        "password"
+      ]
+    },
+    "Token": {
+      "properties": {
+        "type": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "data": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "type",
+        "message"
+      ]
+    },
+    "GeneralResponse": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ]
+    },
+    "ErrorResponse": {
+      "properties": {
+        "message": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "message"
+      ]
+    }
+  }
+}

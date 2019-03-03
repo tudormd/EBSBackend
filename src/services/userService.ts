@@ -84,7 +84,7 @@ export class UserService {
         const promise = new Promise<UserAttributes>(
             (resolve: Function, reject: Function) => {
                 db.sequelize.transaction((t: Transaction) => {
-                    return db.models.User.findById(id) 
+                    return db.models.User.findById(id)
                         .then((result: UserAttributes) => {
                             // @ts-ignore
                             result.update(qMSUserAttributes);
