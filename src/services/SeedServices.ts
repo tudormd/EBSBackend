@@ -9,13 +9,11 @@ import { Transaction } from 'sequelize';
 export class SeedService {
 
     populateDBWithData(): Promise<any> {
-        console.log('populateDBWithData::');
 
         const promise = new Promise<any>((resolve: Function, reject: Function) => {
             db.sequelize.transaction(async (t: Transaction) => {
                 const lastUser = await this.seed();
-                console.log('lastUser::', lastUser);
-
+                
                 resolve(lastUser);
             })
                 .catch((error: Error) => {
