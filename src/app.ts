@@ -10,16 +10,6 @@ import cors from 'cors';
 import { db } from './db';
 
 process.env.APP_ENV && dotenv.config({ path: process.env.APP_ENV });
-console.log('APP_ENV::', process.env.APP_ENV);
-console.log('APP_PORT::', process.env.APP_PORT);
-console.log('APP_SECRET::', process.env.APP_SECRET);
-console.log('DATABASE_DB::', process.env.DATABASE_DB);
-console.log('DATABASE_USER::', process.env.DATABASE_USER);
-console.log('DATABASE_PASS::', process.env.DATABASE_PASS);
-console.log('DATABASE_HOST::', process.env.DATABASE_HOST);
-console.log('DATABASE_PORT::', process.env.DATABASE_PORT);
-
-
 
 import { routes as usersRouter } from './routes/UsersRouter';
 import { routes as groupRouter } from './routes/GroupsRouter';
